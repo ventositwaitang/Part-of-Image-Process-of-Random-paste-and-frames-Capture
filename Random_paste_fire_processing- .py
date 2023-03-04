@@ -61,7 +61,7 @@ for box in human_boxes:  # boxes (n,5)
     cat, x1, y1, x2, y2 = box  # print(box)
     human = target_pic[int(y1 * th) : int(y2 * th), int(x1 * tw) : int(x2 * tw)]
 
-# cv2.imshow("human", human)
+cv2.imshow("human", human)
 cv2.imshow("target", target_pic)
 """================================================================================================================================="""
 
@@ -108,8 +108,18 @@ for j in range(3):
 
 cv2.imshow("blended", target_pic)
 
+"""
+def random_lr_flip(image: np.ndarray, label: np.ndarray, p: float = 0.5):
+    if random.random() > p:
+        image = np.flip(image, axis=1)
+        label = label.copy()
+        label[:, 1] = 1 - label[:, 1]
+        pass
+    return image, label
+"""
 
-""" target[:50,:50,][fire_mask, :,:] = fire[fire_mask, :,:]
+""" 
+target[:50,:50,][fire_mask, :,:] = fire[fire_mask, :,:]
 roi = target[350 : 350 + th, 800 : 800 + tw]
 imageROI = cv2.cvtColor(fire, cv2.COLOR_BGR2GRAY)
 imageROI = cv2.bitwise_and(roi, roi, mask=imageROI)
